@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="team-page">
+            <div class="team-info">
+                <h2 id="selected-team-name">Team Name</h2>
+                <button onclick="goBack()">Back to Team Selection</button>
+            </div>
+            <input type="text" id="player-name" placeholder="Enter player name">
+            <button onclick="addPlayer()">Add Player</button>
+            <ul id="player-list"></ul>
+
+            <div class="positions-grid">
+                <div id="left-field" class="position-box">LEFT FIELD</div>
+                <div id="left-center-field" class="position-box">LEFT CENTER FIELD</div>
+                <div id="right-center-field" class="position-box">RIGHT CENTER FIELD</div>
+                <div id="right-field" class="position-box">RIGHT FIELD</div>
+                <div id="third-base" class="position-box">THIRD BASE</div>
+                <div id="short-stop" class="position-box">SHORT STOP</div>
+                <div id="second-base" class="position-box">SECOND BASE</div>
+                <div id="first-base" class="position-box">FIRST BASE</div>
+                <div id="pitcher-1" class="position-box">PITCHER #1</div>
+                <div id="catcher" class="position-box">CATCHER</div>
+                <div id="pitcher-2" class="position-box">PITCHER #2</div>
+            </div>
+
+            <div id="sitting-players">
+                <h3>Sitting Players</h3>
+                <ul id="sitting-list"></ul>
+            </div>
+
+            <button id="assignPositions" onclick="assignPositions()">Assign Positions</button>
+
+            <div class="inning-navigation">
+                <button onclick="previousInning()"><</button>
+                <span id="current-inning">Inning 1</span>
+                <button onclick="nextInning()">></button>
+            </div>
+        </div>
+    </div>
+    <script src="team.js"></script>
+</body>
+</html>

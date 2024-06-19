@@ -1,0 +1,203 @@
+/* General Styles */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    margin: 10px 0;
+    color: #006400; /* Green */
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    position: relative;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    margin: 5px;
+    display: inline-block;
+    width: calc(20% - 10px); /* Adjusted to fit 5 names in a row with margin */
+    text-align: center;
+    background-color: #fff;
+    color: #006400; /* Green */
+}
+
+li:hover {
+    background-color: #f0f0f0;
+}
+
+li .remove-btn {
+    display: none;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: red;
+    cursor: pointer;
+}
+
+li:hover .remove-btn {
+    display: inline;
+}
+
+button {
+    background-color: #7cb342; /* Light green */
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color: #689f38; /* Darker green */
+}
+
+input[type="text"], input[type="number"] {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Index.html Specific Styles */
+
+#index-page {
+    text-align: center;
+}
+
+#index-page h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#index-page ul {
+    margin-top: 20px;
+}
+
+#index-page li {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+#index-page button {
+    margin-top: 10px;
+}
+
+/* Team.html Specific Styles */
+
+.team-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.team-info h2 {
+    margin: 0;
+    color: #006400; /* Green */
+    font-size: 32px; /* Increased font size */
+}
+
+#player-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.positions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.position-box {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    position: relative;
+}
+
+.position-box::after {
+    content: attr(data-player);
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#sitting-players {
+    margin-top: 20px;
+}
+
+#sitting-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+#sitting-list li {
+    padding: 5px 10px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+.inning-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.inning-navigation button {
+    background-color: transparent;
+    color: #006400; /* Blue */
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.inning-navigation button:hover {
+    color: #0056b3; /* Darker blue */
+}
+
+#current-inning {
+    font-size: 24px;
+    margin: 0 20px;
+}
