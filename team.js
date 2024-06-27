@@ -1,5 +1,3 @@
-// team.js
-
 let teams = [];
 let currentTeamIndex = -1;
 let currentInning = 1;

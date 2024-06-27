@@ -17,49 +17,97 @@
             <button onclick="addPlayer()">Add Player</button>
             <ul id="player-list"></ul>
 
-            <div>
-                <label for="additional-infielders">Additional Infielders:</label>
-                <select id="additional-infielders">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div>
-                <label for="additional-outfielders">Additional Outfielders:</label>
-                <select id="additional-outfielders">
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
+            <div class="additional-positions-container">
+                <div>
+                    <label for="additional-infielders">Additional Infielders:</label>
+                    <select id="additional-infielders">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="additional-outfielders">Additional Outfielders:</label>
+                    <select id="additional-outfielders">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <button id="assignPositions" onclick="assignPositions()">Assign Positions</button>
             </div>
 
+
             <div class="positions-grid">
-                <div id="left-field" class="position-box">LEFT FIELD</div>
-                <div id="center-field" class="position-box">CENTER FIELD</div>
-                <div id="right-field" class="position-box">RIGHT FIELD</div>
-                <div id="third-base" class="position-box">THIRD BASE</div>
-                <div id="short-stop" class="position-box">SHORT STOP</div>
-                <div id="second-base" class="position-box">SECOND BASE</div>
-                <div id="first-base" class="position-box">FIRST BASE</div>
-                <div id="pitcher" class="position-box">PITCHER</div>
-                <div id="catcher" class="position-box">CATCHER</div>
-                <div id="additional-infield-1" class="position-box hidden">ADDITIONAL INFIELD 1</div>
-                <div id="additional-infield-2" class="position-box hidden">ADDITIONAL INFIELD 2</div>
-                <div id="additional-infield-3" class="position-box hidden">ADDITIONAL INFIELD 3</div>
-                <div id="additional-outfield-1" class="position-box hidden">ADDITIONAL OUTFIELD 1</div>
-                <div id="additional-outfield-2" class="position-box hidden">ADDITIONAL OUTFIELD 2</div>
-                <div id="additional-outfield-3" class="position-box hidden">ADDITIONAL OUTFIELD 3</div>
+                <div id="left-field" class="position-box">
+                    LEFT FIELD
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="center-field" class="position-box">
+                    CENTER FIELD
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="right-field" class="position-box">
+                    RIGHT FIELD
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="third-base" class="position-box">
+                    THIRD BASE
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="short-stop" class="position-box">
+                    SHORT STOP
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="second-base" class="position-box">
+                    SECOND BASE
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="first-base" class="position-box">
+                    FIRST BASE
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="pitcher" class="position-box">
+                    PITCHER
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="catcher" class="position-box">
+                    CATCHER
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-infield-1" class="position-box hidden">
+                    ADDITIONAL INFIELD 1
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-infield-2" class="position-box hidden">
+                    ADDITIONAL INFIELD 2
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-infield-3" class="position-box hidden">
+                    ADDITIONAL INFIELD 3
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-outfield-1" class="position-box hidden">
+                    ADDITIONAL OUTFIELD 1
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-outfield-2" class="position-box hidden">
+                    ADDITIONAL OUTFIELD 2
+                    <div class="player-name" data-player=""></div>
+                </div>
+                <div id="additional-outfield-3" class="position-box hidden">
+                    ADDITIONAL OUTFIELD 3
+                    <div class="player-name" data-player=""></div>
+                </div>
             </div>
+            
 
             <div id="sitting-players">
                 <h3>Sitting Players</h3>
                 <ul id="sitting-list"></ul>
             </div>
-
-            <button id="assignPositions" onclick="assignPositions()">Assign Positions</button>
 
             <div class="inning-navigation">
                 <button onclick="previousInning()"><</button>

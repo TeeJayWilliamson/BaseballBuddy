@@ -5,6 +5,7 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 #app {
@@ -19,6 +20,7 @@ body {
 h1, h2, h3 {
     margin: 10px 0;
     color: #006400; /* Green */
+    text-align: center;
 }
 
 ul {
@@ -121,6 +123,7 @@ input[type="text"], input[type="number"] {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .team-info h2 {
@@ -136,37 +139,53 @@ input[type="text"], input[type="number"] {
 
 .positions-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    margin-top: 20px;
+    background-color: #fff; /* Match background color */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.position-box {
-    background-color: #f8f9fa;
+.positions-grid .position-box {
     border: 1px solid #ccc;
     padding: 10px;
-    border-radius: 5px;
     text-align: center;
-    font-size: 12px;
-    position: relative;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    color: #006400;
 }
 
-.position-box::after {
-    content: attr(data-player);
-    display: block;
-    margin-top: 5px;
+.positions-grid .position-box .player-name {
     font-size: 14px;
     font-weight: bold;
+    color: #006400; /* Green */
+}
+
+.hidden {
+    display: none;
+}
+
+.player-name {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #006400; /* Green */
 }
 
 #sitting-players {
     margin-top: 20px;
+    background-color: #fff; /* Match background color */
+    padding: 10px; /* Add padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 #sitting-list {
     list-style-type: none;
     padding: 0;
-    display: flex;
     flex-wrap: wrap;
     gap: 5px;
 }
@@ -175,33 +194,63 @@ input[type="text"], input[type="number"] {
     padding: 5px 10px;
     background-color: #eee;
     border-radius: 3px;
-}
-
-.inning-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.inning-navigation button {
-    background-color: transparent;
+    font-size: 14px;
     color: #006400; /* Green */
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 0 10px;
 }
 
-.inning-navigation button:hover {
-    color: #0056b3; /* Darker blue */
+.additional-positions-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 20px;
 }
 
-#current-inning {
-    font-size: 24px;
-    margin: 0 20px;
+.additional-positions-container > div {
+    margin-right: 10px; /* Adjust spacing between dropdowns and button */
 }
 
-.position-box.hidden {
-    display: none;
+.additional-positions-container .position-box {
+    border: 1px solid #ccc;
+    padding: 5px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.additional-positions-container .position-box label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #006400; /* Green */
+}
+
+.additional-positions-container .position-box select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100px; /* Adjust width as needed */
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .positions-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .additional-positions-container {
+        flex-direction: column;
+        align-items: flex-start; /* Align items to the start */
+    }
+
+    .additional-positions-container > div {
+        margin-right: 0; /* Reset margin for dropdowns */
+        margin-bottom: 10px; /* Add margin below each item */
+    }
+
+    .additional-positions-container .position-box {
+        width: 100%;
+        margin-bottom: 10px; /* Adjust spacing */
+    }
 }
