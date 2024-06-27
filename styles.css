@@ -150,7 +150,7 @@ input[type="text"], input[type="number"] {
 .positions-grid .position-box {
     border: 1px solid #ccc;
     padding: 10px;
-    text-align: center;
+    text-align: left;
     background-color: #fff;
     border-radius: 3px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow */
