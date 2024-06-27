@@ -50,17 +50,21 @@ li .remove-btn {
     display: none;
     position: absolute;
     right: 5px;
-    top: 50%;
+    top: 35%;
     transform: translateY(-50%);
     background-color: transparent;
     border: none;
     font-size: 16px;
-    color: red;
+    color: black;
     cursor: pointer;
 }
 
 li:hover .remove-btn {
     display: inline;
+}
+
+li .remove-btn:hover {
+    color: red;
 }
 
 button {
@@ -72,10 +76,6 @@ button {
     border-radius: 3px;
     transition: background-color 0.3s ease;
     margin-top: 5px;
-}
-
-button:hover {
-    background-color: #689f38; /* Darker green */
 }
 
 input[type="text"], input[type="number"] {
@@ -186,7 +186,7 @@ input[type="text"], input[type="number"] {
 
 .inning-navigation button {
     background-color: transparent;
-    color: #006400; /* Blue */
+    color: #006400; /* Green */
     border: none;
     font-size: 24px;
     cursor: pointer;
@@ -200,4 +200,8 @@ input[type="text"], input[type="number"] {
 #current-inning {
     font-size: 24px;
     margin: 0 20px;
+}
+
+.position-box.hidden {
+    display: none;
 }

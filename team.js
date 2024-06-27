@@ -89,12 +89,21 @@ function renderPlayers() {
 function assignPositions() {
     if (currentTeamIndex > -1) {
         const team = teams[currentTeamIndex];
-        const infieldPositions = ['Third Base', 'Short Stop', 'Second Base', 'First Base', 'Pitcher-1', 'Catcher', 'Pitcher-2'];
-        const outfieldPositions = ['Left Field', 'Left Center Field', 'Right Center Field', 'Right Field'];
-        const positions = [...infieldPositions, ...outfieldPositions];
-        const totalPositions = positions.length;
+        const infieldPositions = ['Third Base', 'Short Stop', 'Second Base', 'First Base', 'Pitcher', 'Catcher'];
+        const outfieldPositions = ['Left Field', 'Center Field', 'Right Field'];
+        const totalInfieldPositions = infieldPositions.length;
+        const totalOutfieldPositions = outfieldPositions.length;
+        const additionalInfielders = parseInt(document.getElementById('additional-infielders').value);
+        const additionalOutfielders = parseInt(document.getElementById('additional-outfielders').value);
+        const totalPositions = totalInfieldPositions + totalOutfieldPositions + additionalInfielders + additionalOutfielders;
         const totalInnings = 9;
         team.assignments = {};
+
+        // Show/Hide additional infield/outfield position boxes
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById(`additional-infield-${i}`).classList.toggle('hidden', i > additionalInfielders);
+            document.getElementById(`additional-outfield-${i}`).classList.toggle('hidden', i > additionalOutfielders);
+        }
 
         // Track which players have sat and how many times
         let playersWhoSat = {};
@@ -131,43 +140,48 @@ function assignPositions() {
                 playersWhoSat[sittingPlayer]++;
                 assignedPlayers.add(sittingPlayer);
                 inningAssignments.push({ position: 'Sitting', player: sittingPlayer });
-                availablePlayers.splice(availablePlayers.indexOf(sittingPlayer), 1);
             }
 
-            // Ensure players alternate between infield and outfield each inning
-            const isEvenInning = inning % 2 === 0;
-            const infieldCandidates = isEvenInning ? availablePlayers.slice(0, infieldPositions.length) : availablePlayers.slice(-infieldPositions.length);
-            const outfieldCandidates = isEvenInning ? availablePlayers.slice(-outfieldPositions.length) : availablePlayers.slice(0, outfieldPositions.length);
+            // Alternate between infield and outfield for remaining players
+            let infieldIndex = 0;
+            let outfieldIndex = 0;
+            let additionalInfieldIndex = 1;
+            let additionalOutfieldIndex = 1;
 
-            // Shuffle candidates to ensure fairness
-            shuffleArray(infieldCandidates);
-            shuffleArray(outfieldCandidates);
-
-            // Assign infield positions
-            infieldPositions.forEach(position => {
-                if (infieldCandidates.length > 0) {
-                    const player = infieldCandidates.shift();
-                    assignedPlayers.add(player);
-                    inningAssignments.push({ position, player });
-                }
-            });
-
-            // Assign outfield positions
-            outfieldPositions.forEach(position => {
-                if (outfieldCandidates.length > 0) {
-                    const player = outfieldCandidates.shift();
-                    assignedPlayers.add(player);
-                    inningAssignments.push({ position, player });
-                }
-            });
-
-            // Ensure no duplicate assignments
-            const allAssignedPlayers = Array.from(assignedPlayers);
-            availablePlayers.forEach(player => {
+            for (const player of availablePlayers) {
                 if (!assignedPlayers.has(player)) {
+                    if (inning % 2 === 1) { // Odd innings: infield first
+                        if (infieldIndex < totalInfieldPositions) {
+                            inningAssignments.push({ position: infieldPositions[infieldIndex], player });
+                            infieldIndex++;
+                        } else if (additionalInfieldIndex <= additionalInfielders) {
+                            inningAssignments.push({ position: `Additional Infield ${additionalInfieldIndex}`, player });
+                            additionalInfieldIndex++;
+                        } else if (outfieldIndex < totalOutfieldPositions) {
+                            inningAssignments.push({ position: outfieldPositions[outfieldIndex], player });
+                            outfieldIndex++;
+                        } else if (additionalOutfieldIndex <= additionalOutfielders) {
+                            inningAssignments.push({ position: `Additional Outfield ${additionalOutfieldIndex}`, player });
+                            additionalOutfieldIndex++;
+                        }
+                    } else { // Even innings: outfield first
+                        if (outfieldIndex < totalOutfieldPositions) {
+                            inningAssignments.push({ position: outfieldPositions[outfieldIndex], player });
+                            outfieldIndex++;
+                        } else if (additionalOutfieldIndex <= additionalOutfielders) {
+                            inningAssignments.push({ position: `Additional Outfield ${additionalOutfieldIndex}`, player });
+                            additionalOutfieldIndex++;
+                        } else if (infieldIndex < totalInfieldPositions) {
+                            inningAssignments.push({ position: infieldPositions[infieldIndex], player });
+                            infieldIndex++;
+                        } else if (additionalInfieldIndex <= additionalInfielders) {
+                            inningAssignments.push({ position: `Additional Infield ${additionalInfieldIndex}`, player });
+                            additionalInfieldIndex++;
+                        }
+                    }
                     assignedPlayers.add(player);
                 }
-            });
+            }
 
             team.assignments[inning] = inningAssignments;
         }
@@ -177,54 +191,37 @@ function assignPositions() {
     }
 }
 
-
-
-
-
-
-
 // Render position assignments for the current inning
 function renderAssignments() {
-    if (currentTeamIndex > -1) {
-        const team = teams[currentTeamIndex];
-        const assignments = team.assignments[currentInning];
-        const positions = [
-            'left-field', 'left-center-field', 'right-center-field', 'right-field',
-            'third-base', 'short-stop', 'second-base', 'first-base',
-            'pitcher-1', 'catcher', 'pitcher-2'
-        ];
+    if (currentTeamIndex > -1 && teams[currentTeamIndex].assignments) {
+        const assignments = teams[currentTeamIndex].assignments[currentInning] || [];
+        const positionElements = document.getElementsByClassName('position-box');
 
         // Clear previous assignments
-        positions.forEach(position => {
-            const positionElement = document.getElementById(position);
-            if (positionElement) {
-                positionElement.innerHTML = position.split('-').join(' ').toUpperCase(); // Reset to position name
+        Array.from(positionElements).forEach(el => el.innerText = el.id.replace(/-/g, ' ').toUpperCase());
+
+        // Display current assignments
+        assignments.forEach(assignment => {
+            const positionBox = document.getElementById(assignment.position.toLowerCase().replace(/ /g, '-'));
+            if (positionBox) {
+                positionBox.innerText = `${assignment.position.toUpperCase()}: ${assignment.player}`;
             }
         });
 
+        // Render sitting players
         const sittingList = document.getElementById('sitting-list');
         sittingList.innerHTML = '';
-
-        // Assign players to positions
-        assignments.forEach(assignment => {
-            if (assignment.position === 'Sitting') {
-                const li = document.createElement('li');
-                li.innerText = assignment.player;
-                sittingList.appendChild(li);
-            } else {
-                const positionId = assignment.position.toLowerCase().replace(/ /g, '-');
-                const positionElement = document.getElementById(positionId);
-                if (positionElement) {
-                    positionElement.innerHTML = `${assignment.position}<br>${assignment.player}`;
-                }
-            }
+        assignments.filter(a => a.position === 'Sitting').forEach(a => {
+            const li = document.createElement('li');
+            li.innerText = a.player;
+            sittingList.appendChild(li);
         });
-
-        document.getElementById('current-inning').innerText = `Inning ${currentInning}`;
     }
+
+    document.getElementById('current-inning').innerText = `Inning ${currentInning}`;
 }
 
-// Navigate to previous inning
+// Navigate to the previous inning
 function previousInning() {
     if (currentInning > 1) {
         currentInning--;
@@ -232,7 +229,7 @@ function previousInning() {
     }
 }
 
-// Navigate to next inning
+// Navigate to the next inning
 function nextInning() {
     if (currentInning < 9) {
         currentInning++;
